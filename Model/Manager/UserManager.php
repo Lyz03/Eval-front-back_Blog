@@ -10,6 +10,23 @@ class UserManager
     public const TABLE = 'user';
 
     /**
+     * Create a new User Entity
+     * @param array $data
+     * @return User
+     */
+    private static function createUser(array $data): User
+    {
+        return (new User())
+            ->setId($data['id'])
+            ->setEmail($data['email'])
+            ->setUsername($data['username'])
+            ->setPassword($data['password'])
+            ->setRole($data['role'])
+        ;
+    }
+
+
+    /**
      * Return a user based on a given id.
      * @param int $id
      * @return User
@@ -20,14 +37,40 @@ class UserManager
         $query = DB::getConnection()->query("SELECT * FROM " . self::TABLE . "  WHERE id = $id");
 
         if ($query && $data = $query->fetch()) {
-            $user = (new User())
-                ->setId($data['id'])
-                ->setEmail($data['email'])
-                ->setUsername($data['username'])
-                ->setPassword($data['password'])
-                ->setRole($data['role'])
-            ;
+            $user = self::createUser($data);
         }
         return $user;
+    }
+
+
+    /**
+     * Register new user
+     * @param string $mail
+     * @param string $username
+     * @param string $password
+     */
+    public function registerUser(string $mail, string $username, string $password) {
+
+        $stmt = DB::getConnection()->prepare("INSERT INTO " . self::TABLE . " (email, username, password)
+            VALUES (:email, :username, :password)");
+
+        $stmt->bindParam('email', $mail);
+        $stmt->bindParam('username', $username);
+        $stmt->bindParam('password', $password);
+
+
+        $stmt->execute();
+    }
+
+
+    public function connectUser(string $mail): ?User {
+        $query = DB::getConnection()->query("SELECT * FROM " . self::TABLE . " WHERE email = '$mail'");
+
+        if ($query && $data = $query->fetch()) {
+
+            return self::createUser($data);
+        }
+
+        return null;
     }
 }

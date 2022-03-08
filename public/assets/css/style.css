@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+:root {
+    --white: rgb(252, 252, 252);
+    --black: rgb(78, 78, 78);
+    --mainColor: rgb(121, 136, 146);
+    --mainColor2: rgb(101, 134, 141);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    padding-bottom: 10rem;
+    position: relative;
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+}
+
+h1 {
+    font-weight: bold;
+    color: var(--mainColor2);
+    text-align: center;
+    margin: 1rem;
+}
+
+h2 {
+    color: var(--black);
+    margin: 1rem;
+}
+
+main {
+    max-width: 75%;
+}
+
+aside {
+    border: 1px solid gray;
+    width: 18rem;
+    padding: 0.5rem;
+    position: absolute;
+    top: 3rem;
+    right: 0.5rem;
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 1rem;
+    background-color: var(--mainColor2);
+}
+
+/*
+ * Menu
+ */
+nav span {
+    display: none;
+}
+
+nav {
+    background-color: var(--mainColor);
+    box-shadow: 0 3px 5px #dbdbdb;
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav div {
+    display: inline-block;
+    width: 50%;
+}
+
+.logo {
+    margin: 0.5rem;
+    color: var(--white);
+    position: absolute;
+    left: 0.5rem;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav form {
+    display: inline-block;
+    padding: 0.4rem 0;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-family: sans-serif;
+    padding: 0.5rem 1rem;
+    border-bottom: 3px solid transparent;
+    transition: border-bottom-color 300ms;
+}
+
+nav a:hover {
+    border-bottom: 3px solid var(--white);
+}
+
+/*
+ * RESPONSIVE
+ */
+
+/*
+ * Main
+ */
+@media screen and (max-width: 1190px) {
+    main {
+        max-width: 60%;
+    }
+}
+
+/*
+ * Aside
+ */
+@media screen and (max-width: 750px) {
+    aside {
+        position: relative;
+        right: 0;
+        width: 95%;
+        margin: auto;
+    }
+}
+
+/*
+ * Menu
+ */
+@media screen and (max-width: 700px) {
+    nav div {
+        display: none;
+    }
+
+    nav span {
+        display: inline-block;
+    }
+
+    nav span i {
+        color: var(--white);
+        padding: 0.5rem 0.7rem;
+        font-size: 1.3rem;
+    }
+
+    div.menu {
+        position: absolute;
+        z-index: 10;
+        right: 0;
+        top: 2rem;
+        background-color: var(--mainColor);
+        width: 10rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav a {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/*
+ * Connection / Inscription
+ */
+form h2 {
+    color: var(--mainColor);
+}
+
+#register, #connection {
+    padding: 1rem;
+    border: 2px solid var(--mainColor2);
+    border-radius: 15px;
+    width: 30rem;
+    max-width: 100%;
+    margin: 2rem auto;
+}
+
+form input:not([type=submit], [type=search]) {
+    font-size: 1rem;
+    display: block;
+    padding: 0.3rem 0.5rem;
+    width: 20rem;
+    margin: 2rem;
+    color: #8d8d8d;
+}
+
+form input:not([type=submit], [type=search]):focus {
+    outline: none;
+}
+
+form input[type=submit] {
+    margin-left: 2rem;
+    padding: 0.3rem 0.5rem 0.4rem 0.5rem;
+    background-color: var(--mainColor);
+    border: none;
+    color: var(--white);
+}
+
+p.createAccount {
+    text-align: center;
+}
+
+span.createAccount {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+span.createAccount:hover {
+    cursor: pointer;
+}
+
+#register {
+    display: none;
+}

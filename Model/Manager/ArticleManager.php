@@ -11,6 +11,19 @@ class ArticleManager
     public const TABLE = 'article';
 
     /**
+     * Select an article by its id
+     * @param int $id
+     * @return array|null
+     */
+    public function getArticleById(int $id): ?array {
+
+        return self::createArticles(
+            DB::getConnection()->query("SELECT * FROM " . self::TABLE . "  WHERE id = $id")
+        );
+
+    }
+
+    /**
      * return the last $nbOfArticle
      * @param int $nbOfArticle
      * @return array
@@ -27,7 +40,6 @@ class ArticleManager
      * @return array
      */
     public function getAll():array {
-
         return $this->createArticles(DB::getConnection()->query("SELECT * FROM " . self::TABLE));
     }
 

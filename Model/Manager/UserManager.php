@@ -32,7 +32,6 @@ class UserManager
      * @return User
      */
     public function getUserById(int $id): ?User {
-
         $user = null;
         $query = DB::getConnection()->query("SELECT * FROM " . self::TABLE . "  WHERE id = $id");
 

@@ -23,7 +23,7 @@
     </div>
 </nav>
 
-<main class="container">
+<main>
     <?= $html ?>
 </main>
 

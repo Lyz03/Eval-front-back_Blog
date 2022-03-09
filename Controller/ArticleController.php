@@ -1,17 +1,30 @@
 <?php
 
 use App\Controller\AbstractController;
+use App\Model\Manager\ArticleManager;
 
 class ArticleController extends AbstractController
 {
 
     public function default()
     {
-        $this->render('article/article-list');
+        $articleManager = new ArticleManager();
+
+        $this->render('article/article-list', [
+            'article-list' => $articleManager->getAll()
+        ]);
     }
 
-    public function test(string $b) {
-        echo $b;
+    /**
+     * Article full page
+     * @param int $id
+     */
+    public function showArticle(int $id) {
+        $articleManager = new ArticleManager();
+
+        $this->render('article/article', [
+            'article' => $articleManager->getArticleById($id)[0]
+        ]);
     }
 
 }

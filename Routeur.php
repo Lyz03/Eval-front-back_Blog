@@ -64,9 +64,11 @@ class Routeur
      */
     private static function controllerExist(string $controller) {
         $controller = ucfirst($controller) . 'Controller';
+
         if (class_exists($controller)) {
             return new $controller();
         }
+
         return new ErrorController();
     }
 

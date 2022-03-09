@@ -16,7 +16,7 @@ class RegisterController extends AbstractController
      * sanitize POST content to create a new user
      */
     public function newUser() {
-        if (isset($_POST['submitRegister'])) {
+        if (!isset($_POST['submitRegister'])) {
             self::default();
             exit();
         }

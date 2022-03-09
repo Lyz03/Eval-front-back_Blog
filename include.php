@@ -15,9 +15,11 @@ require __DIR__ . "/Model/Manager/CommentManager.php";
 require __DIR__ . '/Controller/AbstractController.php';
 require __DIR__ . '/Controller/ErrorController.php';
 require __DIR__ . '/Controller/BaseController.php';
+require __DIR__ . '/Controller/UserController.php';
 require __DIR__ . '/Controller/ConnectionController.php';
 require __DIR__ . '/Controller/RegisterController.php';
 require __DIR__ . '/Controller/HomeController.php';
 require __DIR__ . '/Controller/ArticleController.php';
+require __DIR__ . '/Controller/CommentController.php';
 
 require __DIR__ . '/Routeur.php';

@@ -6,6 +6,7 @@ class Comment extends AbstractEntity
 {
 
     private string $content;
+    private Article $article;
     private User $user;
 
     /**
@@ -23,6 +24,24 @@ class Comment extends AbstractEntity
     public function setContent(string $content): self
     {
         $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * @return Article
+     */
+    public function getArticle(): Article
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param Article $article
+     * @return Comment
+     */
+    public function setArticle(Article $article): self
+    {
+        $this->article = $article;
         return $this;
     }
 

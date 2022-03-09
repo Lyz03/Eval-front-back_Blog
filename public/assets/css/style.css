@@ -34,8 +34,13 @@ h2 {
     margin: 1rem;
 }
 
+label {
+    display: block;
+}
+
 .flex {
     display: flex;
+    justify-content: space-around;
 }
 
 main {
@@ -110,6 +115,14 @@ nav a {
 
 nav a:hover {
     border-bottom: 3px solid var(--white);
+}
+
+/*
+ * Article
+ */
+
+.article_container {
+    margin-bottom: 1rem;
 }
 
 /*

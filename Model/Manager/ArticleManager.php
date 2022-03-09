@@ -15,11 +15,11 @@ class ArticleManager
      * @param int $id
      * @return array|null
      */
-    public function getArticleById(int $id): ?array {
+    public function getArticleById(int $id): ?Article {
 
         return self::createArticles(
             DB::getConnection()->query("SELECT * FROM " . self::TABLE . "  WHERE id = $id")
-        );
+        )[0];
 
     }
 

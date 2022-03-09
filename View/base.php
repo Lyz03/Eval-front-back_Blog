@@ -18,7 +18,14 @@
         <ul>
             <li><a href="/?c=home">Accueil</a></li>
             <li><a href="/?c=article">Les Articles</a></li>
-            <li><a href="/?c=connection">Connexion</a></li>
+            <?php
+            if (isset($_SESSION['user'])) {
+                echo '<li><a href="/?c=user">compte</a></li>';
+            } else {
+                echo '<li><a href="/?c=connection">Connexion</a></li>';
+            }
+            ?>
+
         </ul>
     </div>
 </nav>

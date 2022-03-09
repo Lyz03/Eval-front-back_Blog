@@ -23,7 +23,7 @@ class ArticleController extends AbstractController
         $articleManager = new ArticleManager();
 
         $this->render('article/article', [
-            'article' => $articleManager->getArticleById($id)[0]
+            'article' => $articleManager->getArticleById($id)
         ]);
     }
 

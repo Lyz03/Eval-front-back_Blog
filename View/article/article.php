@@ -1,8 +1,46 @@
 <?php
 use App\Model\Entity\Article;
+use App\Model\Manager\CommentManager;
+
 ?>
 
 <h1><?= $data['article']->getTitle() ?></h1>
-<div>
+<div class="article_container">
     <?= $data['article']->getContent() ?>
+</div>
+
+<div>
+    <?php
+    if (isset($_SESSION['user'])) {
+        ?>
+
+        <form action="/?c=comment&a=add-comment&id=<?= $data['article']->getId() ?>" method="post">
+            <label for="addComment">Ajouter un commentaire : </label>
+            <textarea name="comment" id="addComment" cols="30" rows="10">
+
+            </textarea>
+            <input type="submit" name="submit">
+        </form>
+
+        <?php
+    }
+    ?>
+</div>
+
+<div class="comment_container">
+    <?php
+    $commentManager = new CommentManager();
+    $comments = $commentManager->getCommentByArticleId($data['article']->getId());
+
+    if($comments === null) {
+        echo '<span>Pas encore de commentaire</span>';
+    } else {
+        foreach ($comments as $value) {
+        ?>
+            <span><?= $value->getUser()->getUsername() ?></span>
+            <p><?= $value->getContent() ?></p>
+        <?php
+        }
+    }
+    ?>
 </div>

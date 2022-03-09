@@ -34,18 +34,21 @@ h2 {
     margin: 1rem;
 }
 
+.flex {
+    display: flex;
+}
+
 main {
     max-width: 75%;
     padding: 1rem;
 }
 
 aside {
+    font-size: 0.8rem;
     border: 1px solid gray;
     width: 18rem;
     padding: 0.5rem;
-    position: absolute;
-    top: 3rem;
-    right: 0.5rem;
+    margin-top: 1rem;
 }
 
 footer {
@@ -128,7 +131,6 @@ nav a:hover {
 @media screen and (max-width: 750px) {
     aside {
         position: relative;
-        right: 0;
         width: 95%;
         margin: auto;
     }

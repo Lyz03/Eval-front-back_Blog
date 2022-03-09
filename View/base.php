@@ -23,15 +23,31 @@
     </div>
 </nav>
 
-<main>
-    <?= $html ?>
-</main>
+<div class="flex">
+    <main>
+        <?= $html ?>
+    </main>
 
-<aside>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa delectus deserunt
-        dolor dolore dolores eligendi exercitationem facere illum incidunt modi officia optio praesentium
-        quasi quidem repellendus similique tempore, veniam?</p>
-</aside>
+    <aside>
+        <?php
+        $articles = new BaseController();
+
+        foreach ($articles as $value) {
+            foreach ($value as $item) {
+                ?>
+
+                <div>
+                    <h2><?= $item->getTitle() ?></h2>
+                    <p><?= substr($item->getContent(), 0, 200)?>...</p>
+                    <a href="/?c=article&a=show-article&id=<?= $item->getId() ?>">Voir plus</a>
+                </div>
+
+                <?php
+            }
+        }
+        ?>
+    </aside>
+</div>
 
 <footer>
     <div>Infos de contact</div>

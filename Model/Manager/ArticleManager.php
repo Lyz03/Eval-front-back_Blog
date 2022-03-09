@@ -31,7 +31,7 @@ class ArticleManager
     public function getLastArticles(int $nbOfArticle): array {
 
         return $this->createArticles( DB::getConnection()
-            ->query("SELECT * FROM " . self::TABLE . "  LIMIT $nbOfArticle"));
+            ->query("SELECT * FROM " . self::TABLE . " ORDER BY id DESC LIMIT $nbOfArticle"));
     }
 
 

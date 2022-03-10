@@ -46,7 +46,6 @@ $id = $user->getId();
 if ($user->getRole() === 'writer' || $user->getRole() === 'admin') {
 ?>
     <a href="/index.php?c=article&a=new-article">écrire un article</a>
-    <a href="/index.php">Modifier un article</a>
     <br>
 <?php
 }

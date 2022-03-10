@@ -66,4 +66,35 @@ class ArticleController extends AbstractController
             'article' => $articleManager->getArticleById($id)
         ]);
     }
+
+    /**
+     * Edit article page
+     */
+    public function editArticlePage() {
+        $this->render('article/edit-article');
+    }
+
+    public function editArticle(int $id) {
+        if (!isset($_POST['submit'])) {
+            self::default();
+            exit();
+        }
+
+        if (!isset($_POST['newComment'])) {
+            self::default();
+            exit();
+        }
+
+        $newValue = strip_tags($_POST['newComment']);
+
+        if (empty($newValue)) {
+            self::default();
+            exit();
+        }
+
+        $commentManager = new CommentManager();
+        $commentManager->editComment($newValue, $id);
+
+        self::default();
+    }
 }

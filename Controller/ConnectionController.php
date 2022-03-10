@@ -40,8 +40,9 @@ class ConnectionController extends AbstractController
 
         if (password_verify($_POST['password'], $user->getPassword())) {
 
+            $user->setPassword('');
             $_SESSION['user'] = $user;
-            $_SESSION['user']->setPassword('');
+
             self::render('user/user-account');
 
         } else {

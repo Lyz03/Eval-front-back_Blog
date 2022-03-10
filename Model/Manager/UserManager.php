@@ -68,16 +68,23 @@ class UserManager
      * @return User|null
      */
     public function connectUser(string $mail): ?User {
-        $query = DB::getConnection()->query("SELECT * FROM " . self::TABLE . " WHERE email = '$mail'");
+        $stmt = DB::getConnection()->prepare("SELECT * FROM " . self::TABLE . " WHERE email = :mail");
 
-        if ($query && $data = $query->fetch()) {
+        $stmt->bindParam('mail', $mail);
 
+        if ($stmt->execute() && $data = $stmt->fetch()) {
             return self::createUser($data);
         }
 
         return null;
     }
 
+    /**
+     * Update a user
+     * @param $field
+     * @param $newValue
+     * @param $userId
+     */
     public function update($field, $newValue, $userId) {
         $stmt = DB::getConnection()->prepare("UPDATE " . self::TABLE . " SET $field = :newValue WHERE id = :userId");
 

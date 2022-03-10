@@ -47,12 +47,12 @@ class RegisterController extends AbstractController
 
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-
             $userManager->registerUser($mail, $username, $password);
 
+            $user = $userManager->connectUser($mail);
+            $user->setPassword('');
+            $_SESSION['user'] = $user;
 
-            $_SESSION['user'] = $userManager->connectUser($mail);
-            $_SESSION['user']->setPassword('');
             self::render('user/user-account');
 
         } else {

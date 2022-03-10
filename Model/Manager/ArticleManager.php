@@ -93,4 +93,31 @@ class ArticleManager
 
         return $db->lastInsertId();
     }
+
+    /**
+     * Select an article by a user id
+     * @param int $id
+     * @return array
+     */
+    public function getArticleByUserId(int $id): array {
+        return $this->createArticles(DB::getConnection()->query("SELECT * FROM " . self::TABLE .
+            " WHERE user_id = $id"));
+    }
+
+    /**
+     * Update article
+     * @param $newTitle
+     * @param $newContent
+     * @param $id
+     */
+    public function editArticle($newTitle, $newContent, $id) {
+        $stmt = DB::getConnection()->prepare("UPDATE " . self::TABLE .
+            " SET content = :newContent, title = :newTitle WHERE id = :id");
+
+        $stmt->bindParam('newTitle', $newTitle);
+        $stmt->bindParam('newContent', $newContent);
+        $stmt->bindParam('id', $id);
+
+        $stmt->execute();
+    }
 }

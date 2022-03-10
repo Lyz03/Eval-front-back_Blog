@@ -1,7 +1,6 @@
 # Eval-front-back_Blog
 
-wysiwyg
-
+!!!! VERIFIER  QUE LES MODIF QUAND ID DANS URL SON FAIT PAR LE BON UTILISATEUR !!!!
 ## Accueil :
 - Présentation du blog 
 - les 4 articles plus récents

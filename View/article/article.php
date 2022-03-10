@@ -6,6 +6,7 @@ use App\Model\Manager\CommentManager;
 <div class="article_container">
     <?= $data['article']->getContent() ?>
 </div>
+<p>Écrit par : <?= $data['article']->getUser()->getUsername() ?></p>
 
 <div>
     <?php

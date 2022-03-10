@@ -8,6 +8,9 @@ $id = $user->getId();
 
 <h2>Information du compte</h2>
 
+<a href="/index.php?c=connection&a=disconnect">Déconnexion</a>
+<br>
+
 <span>Email : <?= $user->getEmail() ?></span>
 
 
@@ -42,7 +45,8 @@ $id = $user->getId();
 <?php
 if ($user->getRole() === 'writer' || $user->getRole() === 'admin') {
 ?>
-    <a href="">voir / éditer / écrire un article</a>
+    <a href="/index.php?c=article&a=new-article">écrire un article</a>
+    <a href="/index.php">Modifier un article</a>
     <br>
 <?php
 }

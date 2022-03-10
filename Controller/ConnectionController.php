@@ -41,11 +41,20 @@ class ConnectionController extends AbstractController
         if (password_verify($_POST['password'], $user->getPassword())) {
 
             $_SESSION['user'] = $user;
+            $_SESSION['user']->setPassword('');
             self::render('user/user-account');
 
         } else {
 
             echo 'mauvais password';
         }
+
+    }
+
+    function disconnect() {
+        $_SESSION = [];
+        session_destroy();
+        // TODO faire expirer le cookie de session
+        self::render('user/connection-register');
     }
 }

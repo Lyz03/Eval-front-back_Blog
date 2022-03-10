@@ -34,15 +34,25 @@ class RegisterController extends AbstractController
             exit();
         }
 
+        $userManager = new UserManager();
+
+        if ($userManager->connectUser($mail) !== null) {
+            echo 'adresse mail déjà enregistré';
+            exit();
+        }
+
         if ($_POST['password'] === $_POST['passwordRepeat']) {
 
             $mail = filter_var($mail, FILTER_VALIDATE_EMAIL);
 
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-            $userManager = new UserManager();
+
             $userManager->registerUser($mail, $username, $password);
 
+
+            $_SESSION['user'] = $userManager->connectUser($mail);
+            $_SESSION['user']->setPassword('');
             self::render('user/user-account');
 
         } else {

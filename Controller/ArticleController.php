@@ -1,5 +1,6 @@
 <?php
 
+use App\Config;
 use App\Controller\AbstractController;
 use App\Model\Manager\ArticleManager;
 
@@ -27,4 +28,42 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * new article page
+     */
+    public function newArticle() {
+        $this->render('article/new-article');
+    }
+
+    /**
+     * Add an article
+     */
+    public function addArticle() {
+
+        if (!isset($_POST['submit'])) {
+            self::render('article/article');
+            exit();
+        }
+
+        if (!isset($_POST['content']) || !isset($_POST['title'])) {
+            self::render('user/user-account');
+            exit();
+        }
+
+        $article = strip_tags($_POST['content'], Config::ALLOWED_TAGS);
+        $title = strip_tags($_POST['title']);
+
+        if (empty($article) || empty($title)) {
+            self::render('user/user-account');
+            exit();
+        }
+
+        $article = htmlentities($article);
+        $articleManager = new ArticleManager();
+        $id = $articleManager->addArticle($title, $article, $_SESSION['user']->getId());
+
+        $this->render('article/article', $data = [
+            'article' => $articleManager->getArticleById($id)
+        ]);
+    }
 }

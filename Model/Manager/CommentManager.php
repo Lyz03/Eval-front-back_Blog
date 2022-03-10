@@ -31,7 +31,7 @@ class CommentManager
      * @param int $id
      * @return array
      */
-    public function getCommentByAnId(string $column, int $id): array {
+    public function getCommentByAnId(string $column, int $id): ?array {
         $comments = null;
         $query = DB::getConnection()->query("SELECT * FROM " . self::TABLE . "  WHERE $column = $id");
 
@@ -64,6 +64,11 @@ class CommentManager
         $stmt->execute();
     }
 
+    /**
+     * Update comment
+     * @param $newValue
+     * @param $id
+     */
     public function editComment($newValue, $id) {
         $stmt = DB::getConnection()->prepare("UPDATE " . self::TABLE . " SET content = :newValue WHERE id = :id");
 

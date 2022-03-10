@@ -8,7 +8,12 @@
     <input type="submit" name="submitConnection">
 </form>
 
-<p class="createAccount">Vous ne  possédez pas de compte créer en un <span class="createAccount">ici</span></p>
+<?php
+if (!isset($_SESSION['user'])) {
+    echo '<p class="createAccount">Vous ne possédez pas de compte créer en un <span class="createAccount">ici</span></p>';
+}
+?>
+
 
 <form id="register" action="/index.php?c=register&a=new-user" method="post">
     <h2>Inscription</h2>

@@ -13,12 +13,12 @@ class CommentController extends AbstractController
     }
 
     public function addComment(int $id) {
-        if (!$_POST['submit']) {
+        if (!isset($_POST['submit'])) {
             self::render('article/article');
             exit();
         }
 
-        if (!$_POST['comment']) {
+        if (!isset($_POST['comment'])) {
             self::render('article/article');
             exit();
         }

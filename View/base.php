@@ -16,13 +16,13 @@
 
     <div class="menu">
         <ul>
-            <li><a href="/?c=home">Accueil</a></li>
-            <li><a href="/?c=article">Les Articles</a></li>
+            <li><a href="/index.php?c=home">Accueil</a></li>
+            <li><a href="/index.php?c=article">Les Articles</a></li>
             <?php
             if (isset($_SESSION['user'])) {
-                echo '<li><a href="/?c=user">compte</a></li>';
+                echo '<li><a href="/index.php?c=user">compte</a></li>';
             } else {
-                echo '<li><a href="/?c=connection">Connexion</a></li>';
+                echo '<li><a href="/index.php?c=connection">Connexion</a></li>';
             }
             ?>
 
@@ -46,7 +46,7 @@
                 <div>
                     <h2><?= $item->getTitle() ?></h2>
                     <p><?= substr($item->getContent(), 0, 200)?>...</p>
-                    <a href="/?c=article&a=show-article&id=<?= $item->getId() ?>">Voir plus</a>
+                    <a href="/index.php?c=article&a=show-article&id=<?= $item->getId() ?>">Voir plus</a>
                 </div>
 
                 <?php

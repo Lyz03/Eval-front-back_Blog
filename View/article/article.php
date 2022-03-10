@@ -1,7 +1,5 @@
 <?php
-use App\Model\Entity\Article;
 use App\Model\Manager\CommentManager;
-
 ?>
 
 <h1><?= $data['article']->getTitle() ?></h1>
@@ -16,9 +14,7 @@ use App\Model\Manager\CommentManager;
 
         <form action="/?c=comment&a=add-comment&id=<?= $data['article']->getId() ?>" method="post">
             <label for="addComment">Ajouter un commentaire : </label>
-            <textarea name="comment" id="addComment" cols="30" rows="10">
-
-            </textarea>
+            <textarea name="comment" id="addComment" cols="30" rows="10"></textarea>
             <input type="submit" name="submit">
         </form>
 
@@ -30,15 +26,16 @@ use App\Model\Manager\CommentManager;
 <div class="comment_container">
     <?php
     $commentManager = new CommentManager();
-    $comments = $commentManager->getCommentByArticleId($data['article']->getId());
+    $comments = $commentManager->getCommentByAnId('article_id', $data['article']->getId());
 
     if($comments === null) {
         echo '<span>Pas encore de commentaire</span>';
     } else {
         foreach ($comments as $value) {
         ?>
-            <span><?= $value->getUser()->getUsername() ?></span>
+            <span class="gray"><?= $value->getUser()->getUsername() ?></span>
             <p><?= $value->getContent() ?></p>
+            <br>
         <?php
         }
     }

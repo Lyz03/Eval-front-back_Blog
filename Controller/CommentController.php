@@ -9,7 +9,7 @@ class CommentController extends AbstractController
 
     public function default()
     {
-        //$this->render('');
+        $this->render('comment/comment');
     }
 
     public function addComment(int $id) {
@@ -38,6 +38,35 @@ class CommentController extends AbstractController
         $this->render('article/article', [
             'article' => $articleManager->getArticleById($id)
         ]);
+    }
+
+    /**
+     * Edit comment
+     * @param int $id
+     */
+    public function editComment(int $id) {
+
+        if (!isset($_POST['submit'])) {
+            self::default();
+            exit();
+        }
+
+        if (!isset($_POST['newComment'])) {
+            self::default();
+            exit();
+        }
+
+        $newValue = strip_tags($_POST['newComment']);
+
+        if (empty($newValue)) {
+            self::default();
+            exit();
+        }
+
+        $commentManager = new CommentManager();
+        $commentManager->editComment($newValue, $id);
+
+        self::default();
     }
 
 }

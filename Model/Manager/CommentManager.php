@@ -26,13 +26,14 @@ class CommentManager
     }
 
     /**
-     * get all comment for an article
+     * Select all comment by $column and its id
+     * @param string $column
      * @param int $id
      * @return array
      */
-    public function getCommentByArticleId(int $id): ?array {
+    public function getCommentByAnId(string $column, int $id): array {
         $comments = null;
-        $query = DB::getConnection()->query("SELECT * FROM " . self::TABLE . "  WHERE article_id = $id");
+        $query = DB::getConnection()->query("SELECT * FROM " . self::TABLE . "  WHERE $column = $id");
 
         if ($query && $data = $query->fetchAll()) {
             $userManager = new UserManager();
@@ -45,6 +46,12 @@ class CommentManager
         return $comments;
     }
 
+    /**
+     * Add a new comment in the database
+     * @param $content
+     * @param $articleId
+     * @param $userId
+     */
     public function addNewComment($content, $articleId, $userId) {
         $stmt = DB::getConnection()->prepare("INSERT INTO " . self::TABLE . " (content, article_id,user_id )
             VALUES (:content, :articleId, :userId)");
@@ -53,6 +60,15 @@ class CommentManager
         $stmt->bindParam('articleId', $articleId);
         $stmt->bindParam('userId', $userId);
 
+
+        $stmt->execute();
+    }
+
+    public function editComment($newValue, $id) {
+        $stmt = DB::getConnection()->prepare("UPDATE " . self::TABLE . " SET content = :newValue WHERE id = :id");
+
+        $stmt->bindParam('newValue', $newValue);
+        $stmt->bindParam('id', $id);
 
         $stmt->execute();
     }

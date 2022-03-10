@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Model\DB;
+
 abstract class AbstractController
 {
     abstract public function default();

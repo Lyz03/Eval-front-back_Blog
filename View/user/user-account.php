@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+}
 $user = $_SESSION['user'];
 $id = $user->getId();
 ?>
@@ -8,7 +11,7 @@ $id = $user->getId();
 <span>Email : <?= $user->getEmail() ?></span>
 
 
-<form action="/?c=user&a=update-email&id=<?= $id ?>" method="post">
+<form action="/index.php?c=user&a=update-email&id=<?= $id ?>" method="post">
     <input type="email" placeholder="nouvel email" name="email">
     <input type="submit" name="submit">
 </form>
@@ -17,14 +20,15 @@ $id = $user->getId();
 
 <span>Nom d'utilisateur : <?= $user->getUsername() ?></span>
 
-<form action="/?c=user&a=update-username&id=<?= $id ?>" method="post">
+<form action="/index.php?c=user&a=update-username&id=<?= $id ?>" method="post">
     <input type="text" placeholder="nouveau nom d'utilisateur" name="username">
     <input type="submit" name="submit">
 </form>
 
 <br>
 
-<form action="/?c=user&a=update-password&id=<?= $id ?>" method="post">
+<span>Changer de mot de passe</span>
+<form action="/index.php?c=user&a=update-password&id=<?= $id ?>" method="post">
     <input type="password" placeholder="ancien mot de passe" name="oldPassword">
     <input type="password" placeholder="nouveau mot de passe" name="password">
     <input type="submit" name="submit">
@@ -32,7 +36,7 @@ $id = $user->getId();
 
 <br>
 
-<a href="">Voir vos commentaire</a>
+<a href="/index.php?c=comment">Voir vos commentaire</a>
 
 <br>
 <?php

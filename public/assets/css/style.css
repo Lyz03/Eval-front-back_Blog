@@ -38,11 +38,6 @@ label {
     display: block;
 }
 
-.flex {
-    display: flex;
-    justify-content: space-around;
-}
-
 main {
     max-width: 75%;
     padding: 1rem;
@@ -54,6 +49,7 @@ aside {
     width: 18rem;
     padding: 0.5rem;
     margin-top: 1rem;
+    max-height: 42rem;
 }
 
 footer {
@@ -62,6 +58,15 @@ footer {
     bottom: 0;
     padding: 1rem;
     background-color: var(--mainColor2);
+}
+
+.flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+.gray {
+    color: #8d8d8d;
 }
 
 /*

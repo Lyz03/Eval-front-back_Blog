@@ -52,7 +52,7 @@ if ($user->getRole() === 'writer' || $user->getRole() === 'admin') {
 
 if ($user->getRole() === 'admin') {
     ?>
-    <a href="">lister des commentaire</a>
-    <a href="">lister des utilisateur</a>
+    <a href="/index.php?c=comment&a=comment-list">liste des commentaire</a>
+    <a href="">liste des utilisateur</a>
     <?php
 }

@@ -12,6 +12,10 @@ class CommentController extends AbstractController
         $this->render('comment/comment');
     }
 
+    /**
+     * add a comment
+     * @param int $id
+     */
     public function addComment(int $id) {
         if (!isset($_POST['submit'])) {
             self::render('article/article');
@@ -67,6 +71,29 @@ class CommentController extends AbstractController
         $commentManager->editComment($newValue, $id);
 
         self::default();
+    }
+
+    /**
+     * Comment list page
+     */
+    public function commentList() {
+        $commentManager = new CommentManager();
+
+        self::render('comment/comment-list', $data = [
+            'comments' => $commentManager->getAll()
+        ]);
+    }
+
+    /**
+     * delete a comment
+     * @param int $id
+     */
+    public function deleteComment(int $id) {
+        $commentManager = new CommentManager();
+
+        $commentManager->deleteComment($id);
+
+        self::commentList();
     }
 
 }

@@ -26,6 +26,30 @@ class CommentManager
     }
 
     /**
+     * Return all comments
+     * @return array
+     */
+    public function getAll():array {
+        $query = DB::getConnection()->query("SELECT * FROM " . self::TABLE);
+        $comments = [];
+
+        if ($query) {
+            $articleManager = new ArticleManager();
+            $userManager = new UserManager();
+            foreach ($query->fetchAll() as $value) {
+                $comments[] = (new Comment())
+                    ->setId($value['id'])
+                    ->setContent($value['content'])
+                    ->setArticle($articleManager->getArticleById($value['article_id']))
+                    ->setUser($userManager->getUserById($value['user_id']))
+                ;
+            }
+        }
+
+        return $comments;
+    }
+
+    /**
      * Select all comment by $column and its id
      * @param string $column
      * @param int $id
@@ -73,6 +97,14 @@ class CommentManager
         $stmt = DB::getConnection()->prepare("UPDATE " . self::TABLE . " SET content = :newValue WHERE id = :id");
 
         $stmt->bindParam('newValue', $newValue);
+        $stmt->bindParam('id', $id);
+
+        $stmt->execute();
+    }
+
+    public function deleteComment(int $id) {
+        $stmt = DB::getConnection()->prepare("DELETE FROM " . self::TABLE . " WHERE id = :id");
+
         $stmt->bindParam('id', $id);
 
         $stmt->execute();

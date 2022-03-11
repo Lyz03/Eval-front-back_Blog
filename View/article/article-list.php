@@ -26,10 +26,12 @@ foreach ($data['article-list'] as $value) {
     ?>
 
     <?php
-    if ($_SESSION['user']->getRole() === 'admin') {
-        ?>
-        <a href="/index.php?c=article&a=delete-article&id=<?= $value->getId() ?>">Supprimer</a>
-        <?php
+    if (isset($_SESSION['user'])) {
+        if ($_SESSION['user']->getRole() === 'admin') {
+            ?>
+            <a href="/index.php?c=article&a=delete-article&id=<?= $value->getId() ?>">Supprimer</a>
+            <?php
+        }
     }
     ?>
     </div>

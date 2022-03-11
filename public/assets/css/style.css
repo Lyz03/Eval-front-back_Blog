@@ -150,6 +150,10 @@ nav a:hover {
     margin-bottom: 1rem;
 }
 
+.comment_container {
+    margin-top: 1rem;
+}
+
 /*
  * Connection / Inscription
  */

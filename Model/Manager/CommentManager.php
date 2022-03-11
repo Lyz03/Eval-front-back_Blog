@@ -102,6 +102,10 @@ class CommentManager
         $stmt->execute();
     }
 
+    /**
+     * delete a comment
+     * @param int $id
+     */
     public function deleteComment(int $id) {
         $stmt = DB::getConnection()->prepare("DELETE FROM " . self::TABLE . " WHERE id = :id");
 

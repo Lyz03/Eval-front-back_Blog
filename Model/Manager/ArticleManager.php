@@ -120,4 +120,16 @@ class ArticleManager
 
         $stmt->execute();
     }
+
+    /**
+     * delete an article
+     * @param int $id
+     */
+    public function deleteArticle(int $id) {
+        $stmt = DB::getConnection()->prepare("DELETE FROM " . self::TABLE . " WHERE id = :id");
+
+        $stmt->bindParam('id', $id);
+
+        $stmt->execute();
+    }
 }

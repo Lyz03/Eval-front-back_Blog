@@ -79,6 +79,10 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * Edit an article
+     * @param int $id
+     */
     public function editArticle(int $id) {
         if (!isset($_POST['submit'])) {
             self::default();
@@ -102,5 +106,16 @@ class ArticleController extends AbstractController
         $articleManager->editArticle($newTitle, $newContent, $id);
 
         self::showArticle($id);
+    }
+
+    /**
+     * delete an article
+     * @param int $id
+     */
+    public function deleteArticle(int $id) {
+        $articleManager = new ArticleManager();
+        $articleManager->deleteArticle($id);
+
+        self::default();
     }
 }

@@ -27,7 +27,8 @@ $id = $user->getId();
 
             <form action="/index.php?c=comment&a=edit-comment&id=<?= $value->getId() ?>" method="post">
                 <label for="newComment">Nouveau commentaire</label>
-                <textarea name="newComment" id="newComment" cols="30" rows="10" class="comment"></textarea>
+                <textarea name="newComment" id="newComment" cols="30" rows="10" class="comment" maxlength="255"
+                          required></textarea>
                 <input type="submit" name="submit">
             </form>
             <br>

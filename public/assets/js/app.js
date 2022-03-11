@@ -82,14 +82,7 @@ function checkForm() {
     // input type text
     if (document.querySelector('input[type=text]')) {
         // title
-        if (document.querySelector('input[type=text].title')) {
-            let comment = document.querySelector('input[type=text].title');
-            if (comment.value.length < 5 || comment.value.length > 255) {
-                comment.setCustomValidity('Le titre doit faire entre 5 et 255 caractères');
-            } else {
-                comment.setCustomValidity('');
-            }
-        }
+
         // username
         if (document.querySelector('input[type=text].username')) {
             let comment = document.querySelector('input[type=text].username');

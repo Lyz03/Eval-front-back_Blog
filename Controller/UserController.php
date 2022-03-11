@@ -100,4 +100,28 @@ class UserController extends AbstractController
         self::default();
     }
 
+    /**
+     * Comment list page
+     */
+    public function UserList() {
+        $userManager = new UserManager();
+
+        self::render('user/user-list', $data = [
+            'users' => $userManager->getAll()
+        ]);
+    }
+
+    /**
+     * delete a user
+     * @param int $id
+     */
+    public function deleteUser(int $id) {
+        $userManager = new UserManager();
+
+        $userManager->deleteUser($id);
+
+        $connectionController = new ConnectionController();
+        $connectionController->disconnect();
+    }
+
 }

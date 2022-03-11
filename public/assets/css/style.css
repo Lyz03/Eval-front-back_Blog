@@ -38,6 +38,10 @@ label {
     display: block;
 }
 
+span {
+    font-weight: bold;
+}
+
 main {
     max-width: 75%;
     padding: 1rem;

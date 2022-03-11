@@ -25,6 +25,22 @@ class UserManager
         ;
     }
 
+    /**
+     * Return all comments
+     * @return array
+     */
+    public function getAll():array {
+        $query = DB::getConnection()->query("SELECT * FROM " . self::TABLE);
+        $users = [];
+
+        if ($query) {
+            foreach ($query->fetchAll() as $value) {
+                $users[] = self::createUser($value);
+            }
+        }
+
+        return $users;
+    }
 
     /**
      * Return a user based on a given id.
@@ -90,6 +106,18 @@ class UserManager
 
         $stmt->bindParam('newValue', $newValue);
         $stmt->bindParam('userId', $userId);
+
+        $stmt->execute();
+    }
+
+    /**
+     * delete a user
+     * @param int $id
+     */
+    public function deleteUser(int $id) {
+        $stmt = DB::getConnection()->prepare("DELETE FROM " . self::TABLE . " WHERE id = :id");
+
+        $stmt->bindParam('id', $id);
 
         $stmt->execute();
     }

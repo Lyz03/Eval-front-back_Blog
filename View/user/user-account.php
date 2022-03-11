@@ -9,6 +9,7 @@ $id = $user->getId();
 <h2>Information du compte</h2>
 
 <a href="/index.php?c=connection&a=disconnect">Déconnexion</a>
+<a href="/index.php?c=user&a=delete-user&id=<?= $id ?>">Supprimer votre compte</a>
 <br>
 
 <span>Email : <?= $user->getEmail() ?></span>
@@ -53,6 +54,6 @@ if ($user->getRole() === 'writer' || $user->getRole() === 'admin') {
 if ($user->getRole() === 'admin') {
     ?>
     <a href="/index.php?c=comment&a=comment-list">liste des commentaire</a>
-    <a href="">liste des utilisateur</a>
+    <a href="/index.php?c=user&a=user-list">liste des utilisateur</a>
     <?php
 }

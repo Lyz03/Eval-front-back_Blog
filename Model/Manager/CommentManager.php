@@ -37,12 +37,7 @@ class CommentManager
             $articleManager = new ArticleManager();
             $userManager = new UserManager();
             foreach ($query->fetchAll() as $value) {
-                $comments[] = (new Comment())
-                    ->setId($value['id'])
-                    ->setContent($value['content'])
-                    ->setArticle($articleManager->getArticleById($value['article_id']))
-                    ->setUser($userManager->getUserById($value['user_id']))
-                ;
+                $comments[] = self::createComment($value, $articleManager, $userManager);
             }
         }
 

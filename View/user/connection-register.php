@@ -18,7 +18,7 @@ if (!isset($_SESSION['user'])) {
 <form id="register" action="/index.php?c=register&a=new-user" method="post">
     <h2>Inscription</h2>
     <input type="email" placeholder="Votre email" name="email">
-    <input type="text" placeholder="Votre pseudo" name="username">
+    <input type="text" placeholder="Votre pseudo" name="username" class="username">
 
     <input type="password" placeholder="Votre mot de passe" name="password">
     <input type="password" placeholder="Répéter votre mot de passe" name="passwordRepeat">

@@ -25,7 +25,7 @@ $id = $user->getId();
 <span>Nom d'utilisateur : <?= $user->getUsername() ?></span>
 
 <form action="/index.php?c=user&a=update-username&id=<?= $id ?>" method="post">
-    <input type="text" placeholder="nouveau nom d'utilisateur" name="username">
+    <input type="text" placeholder="nouveau nom d'utilisateur" name="username" class="username">
     <input type="submit" name="submit">
 </form>
 

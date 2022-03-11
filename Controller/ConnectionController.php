@@ -63,7 +63,6 @@ class ConnectionController extends AbstractController
     function disconnect() {
         $_SESSION = [];
         session_destroy();
-        // TODO faire expirer le cookie de session
         self::render('user/connection-register');
     }
 }

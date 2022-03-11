@@ -68,10 +68,15 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Edit article page
+     * Edit an article
+     * @param int $id
      */
-    public function editArticlePage() {
-        $this->render('article/edit-article');
+    public function editArticlePage(int $id) {
+        $articleManager = new ArticleManager();
+
+        $this->render('article/edit-article', $data = [
+            'article' => $articleManager->getArticleById($id)
+        ]);
     }
 
     public function editArticle(int $id) {
@@ -80,21 +85,22 @@ class ArticleController extends AbstractController
             exit();
         }
 
-        if (!isset($_POST['newComment'])) {
+        if (!isset($_POST['title']) || !isset($_POST['content'])) {
             self::default();
             exit();
         }
 
-        $newValue = strip_tags($_POST['newComment']);
+        $newTitle = strip_tags($_POST['title']);
+        $newContent = strip_tags($_POST['content'], Config::ALLOWED_TAGS);
 
-        if (empty($newValue)) {
+        if (empty($newTitle) || empty($newContent)) {
             self::default();
             exit();
         }
 
-        $commentManager = new CommentManager();
-        $commentManager->editComment($newValue, $id);
+        $articleManager = new ArticleManager();
+        $articleManager->editArticle($newTitle, $newContent, $id);
 
-        self::default();
+        self::showArticle($id);
     }
 }

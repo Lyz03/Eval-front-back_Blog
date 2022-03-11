@@ -52,7 +52,6 @@ if ($user->getRole() === 'writer' || $user->getRole() === 'admin') {
 
 if ($user->getRole() === 'admin') {
     ?>
-    <a href="">lister des articles</a>
     <a href="">lister des commentaire</a>
     <a href="">lister des utilisateur</a>
     <?php

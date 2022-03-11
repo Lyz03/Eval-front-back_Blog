@@ -19,7 +19,7 @@ foreach ($data['article-list'] as $value) {
     if ($id !== null) {
         if ($value->getUser()->getId() === $id) {
             ?>
-            <a href="/index.php?c=article&a=show-article&id=<?= $value->getId() ?>">Modifier</a>
+            <a href="/index.php?c=article&a=edit-article-page&id=<?= $value->getId() ?>">Modifier</a>
             <?php
         }
     }

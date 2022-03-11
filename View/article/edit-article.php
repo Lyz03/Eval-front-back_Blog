@@ -9,11 +9,11 @@ if (!isset($_SESSION['user'])) {
 ?>
 <h1>Modifier un article</h1>
 
-<form action="/index.php?c=article&a=edit-article" method="post">
-    <input type="text" name="title" placeholder="Titre">
+<form action="/index.php?c=article&a=edit-article&id=<?= $data['article']->getId() ?>" method="post">
+    <input type="text" name="title" value="<?= $data['article']->getTitle() ?>">
 
     <label for="article_content">Votre Article</label>
-    <textarea name="content" id="article_content" cols="30" rows="10"></textarea>
+    <textarea name="content" id="article_content" cols="30" rows="10"><?= $data['article']->getContent() ?></textarea>
 
     <input type="submit" name="submit">
 </form>

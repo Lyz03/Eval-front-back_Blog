@@ -17,7 +17,7 @@ class UserController extends AbstractController
      */
     private function isSet(string $postIndex) {
         if (!isset($_POST['submit'])) {
-            echo 'test';
+            self::default();
             exit();
         }
 
@@ -124,4 +124,27 @@ class UserController extends AbstractController
         $connectionController->disconnect();
     }
 
+    /**
+     * Update a user role
+     * @param int $id
+     */
+    public function userRole(int $id) {
+        self::isSet('role');
+        $role = $_POST['role'];
+        $userManager = new UserManager();
+
+        if (!in_array($role, ['user', 'admin', 'writer'])) {
+
+            self::render('user/user-list', $data = [
+                'users' => $userManager->getAll()
+            ]);
+            exit();
+        }
+
+        $userManager->update('role', $role, $id);
+
+        self::render('user/user-list', $data = [
+            'users' => $userManager->getAll()
+        ]);
+    }
 }

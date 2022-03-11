@@ -15,5 +15,14 @@ foreach ($data['users'] as $value) {
         <p><?= $value->getRole() ?></p>
         <a href="/index.php?c=user&a=delete-user&id=<?= $value->getId() ?>">Supprimer</a>
     </div>
+    <form action="/index.php?c=user&a=user-role&id=<?= $value->getId() ?>" method="post">
+        <label for="role">nouveau Role :</label>
+        <select name="role" id="role">
+            <option value="user">user</option>
+            <option value="writer">writer</option>
+            <option value="admin">admin</option>
+        </select>
+        <input type="submit" name="submit">
+    </form>
     <?php
 }

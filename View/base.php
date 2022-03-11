@@ -9,6 +9,17 @@
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
+<?php
+if(isset($_SESSION['error'])) {
+    if (count($_SESSION['error']) > 0) {
+        foreach($_SESSION['error'] as $value) { ?>
+            <div class="error"><?= $value ?></div> <?php
+        }
+    }
+
+    unset($_SESSION['error']);
+}
+?>
 <nav>
     <span class="menu"><i class="fas fa-bars"></i></span>
 

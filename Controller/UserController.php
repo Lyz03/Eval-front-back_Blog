@@ -12,6 +12,17 @@ class UserController extends AbstractController
     }
 
     /**
+     * Check if the session user id is the same as $id
+     * @param int $id
+     */
+    private function isSameId(int $id) {
+        if ($_SESSION['user']->getId() !== $id) {
+            self::default();
+            exit();
+        }
+    }
+
+    /**
      * If not set or empty exit
      * @param string $postIndex
      */
@@ -38,10 +49,13 @@ class UserController extends AbstractController
         $mail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $mail = filter_var($mail, FILTER_VALIDATE_EMAIL);
 
-        if (empty($mail)) {
+        if (strlen($mail) < 8 || strlen($mail) >= 150) {
+            $_SESSION['error'] = ["l'adresse email doit faire entre 8 et 150 caractères"];
             self::default();
             exit();
         }
+
+        self::isSameId($id);
 
         $userManager = new UserManager();
         $userManager->update('email', $mail, $id);
@@ -61,10 +75,13 @@ class UserController extends AbstractController
 
         $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
 
-        if (empty($username)) {
+        if (strlen($_POST['username']) < 8 || strlen($_POST['username']) >= 100) {
+            $_SESSION['error'] = ["le pseudo doit faire entre 8 et 100 caractères"];
             self::default();
             exit();
         }
+
+        self::isSameId($id);
 
         $userManager = new UserManager();
         $userManager->update('username', $username, $id);
@@ -87,13 +104,24 @@ class UserController extends AbstractController
             exit();
         }
 
-        if (password_verify($_POST['oldPassword'], $_SESSION['user']->getPassword())) {
+        $password = $_POST['password'];
+        $oldPassword = $_POST['oldPassword'];
+
+        if (strlen($password) < 8 || strlen($password) >= 255 ||
+            strlen($oldPassword) < 8 || strlen($oldPassword) >= 255) {
+
+            $_SESSION['error'] = ["le mot de passe doit faire au moins 8 caractères"];
+            self::default();
+            exit();
+        }
+
+        self::isSameId($id);
+
+        $userManager = new UserManager();
+        if (password_verify($oldPassword, $userManager->getUserById($_SESSION['user']->getId())->getPassword())) {
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-            $userManager = new UserManager();
             $userManager->update('password', $password, $id);
-
-            $_SESSION['user']->setPassword($password);
 
         }
 

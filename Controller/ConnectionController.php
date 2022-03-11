@@ -11,7 +11,6 @@ class ConnectionController extends AbstractController
         $this->render('user/connection-register');
     }
 
-    // TODO TESTER LES TAILLES !!!
     public function connect() {
         if (!isset($_POST['submitConnection'])) {
             self::default();
@@ -24,17 +23,25 @@ class ConnectionController extends AbstractController
         }
 
         $mail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $error = [];
+        if (strlen($mail) < 8 || strlen($mail) >= 150) {
+            $error[] = "l'adresse email doit faire entre 8 et 150 caractères";
+        }
 
-        if (empty($mail) || empty($_POST['password'])) {
-            self::default();
-            exit();
+        if (strlen($_POST['password']) < 8 || strlen($_POST['password']) >= 255) {
+            $error[] = "le mot de passe doit faire entre 8 caractères";
         }
 
         $userManager  = new UserManager();
         $user = $userManager->connectUser($mail);
 
         if ($user === null) {
-            echo 'existe pas';
+            $error[] = "L'utilisateur demandé n'est pas enregistré";
+        }
+
+        if (count($error) > 0) {
+            $_SESSION['error'] = $error;
+            self::default();
             exit();
         }
 
@@ -47,9 +54,10 @@ class ConnectionController extends AbstractController
 
         } else {
 
-            echo 'mauvais password';
+            $_SESSION['error'] = ['Adresse mail ou mot de passe incorrect'];
+            self::default();
+            exit();
         }
-
     }
 
     function disconnect() {

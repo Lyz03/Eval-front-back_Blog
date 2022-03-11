@@ -13,31 +13,37 @@ class CommentController extends AbstractController
     }
 
     /**
-     * add a comment
+     * add a comment with the article id
      * @param int $id
      */
     public function addComment(int $id) {
+        $articleManager = new ArticleManager();
         if (!isset($_POST['submit'])) {
-            self::render('article/article');
+            $this->render('article/article', [
+                'article' => $articleManager->getArticleById($id)
+            ]);
             exit();
         }
 
         if (!isset($_POST['comment'])) {
-            self::render('article/article');
+            $this->render('article/article', [
+                'article' => $articleManager->getArticleById($id)
+            ]);
             exit();
         }
 
         $comment = strip_tags($_POST['comment']);
 
-        if (empty($comment)) {
-            self::render('article/article');
+        if (strlen($comment) < 5) {
+            $_SESSION['error'] = ['Votre commentaire doit faire au moins 5 caractères'];
+            $this->render('article/article', [
+                'article' => $articleManager->getArticleById($id)
+            ]);
             exit();
         }
 
         $commentManager = new CommentManager();
         $commentManager->addNewComment($comment, $id, $_SESSION['user']->getId());
-
-        $articleManager = new ArticleManager();
 
         $this->render('article/article', [
             'article' => $articleManager->getArticleById($id)
@@ -62,12 +68,18 @@ class CommentController extends AbstractController
 
         $newValue = strip_tags($_POST['newComment']);
 
-        if (empty($newValue)) {
+        if (strlen($newValue) < 5) {
+            $_SESSION['error'] = ['Votre commentaire doit faire au moins 5 caractères'];
             self::default();
             exit();
         }
 
         $commentManager = new CommentManager();
+        if ($_SESSION['user']->getId() !== $commentManager->getCommentByAnId('id', $id)[0]->getUser()->getId()) {
+            self::default();
+            exit();
+        }
+
         $commentManager->editComment($newValue, $id);
 
         self::default();

@@ -28,8 +28,23 @@ class RegisterController extends AbstractController
 
         $mail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+        $password = $_POST['password'];
+        $error = [];
 
-        if (empty($mail) || empty($username) || empty($_POST['password'])) {
+        if (strlen($mail) < 8 || strlen($mail) >= 150) {
+            $error[] = "l'adresse email doit faire entre 8 et 150 caractères";
+        }
+
+        if (strlen($_POST['username']) < 8 || strlen($_POST['username']) >= 100) {
+            $error[] = "le pseudo doit faire entre 8 et 100 caractères";
+        }
+
+        if (strlen($password) < 8 || strlen($password) >= 255) {
+            $error[] = "le mot de passe doit faire au moins 8 caractères";
+        }
+
+        if (count($error) > 0) {
+            $_SESSION['error'] = $error;
             self::default();
             exit();
         }
@@ -37,11 +52,18 @@ class RegisterController extends AbstractController
         $userManager = new UserManager();
 
         if ($userManager->connectUser($mail) !== null) {
-            echo 'adresse mail déjà enregistré';
+            $_SESSION['error'] = ['adresse mail déjà enregistré'];
+            self::default();
             exit();
         }
 
-        if ($_POST['password'] === $_POST['passwordRepeat']) {
+        if(!preg_match('/^(?=.*[!@#$%^&*-\])(?=.*[0-9])(?=.*[A-Z]).{8,20}$/', $password)) {
+            $_SESSION['error'] = ["Le mot de passe n'est pas assez sécurisé"];
+            self::default();
+            exit();
+        }
+
+        if ($password === $_POST['passwordRepeat']) {
 
             $mail = filter_var($mail, FILTER_VALIDATE_EMAIL);
 
@@ -56,7 +78,9 @@ class RegisterController extends AbstractController
             self::render('user/user-account');
 
         } else {
+            $_SESSION['error'] = ["Les mot de passe ne corespondent pas"];
             self::default();
+            exit();
         }
     }
 }

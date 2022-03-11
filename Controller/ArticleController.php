@@ -41,20 +41,30 @@ class ArticleController extends AbstractController
     public function addArticle() {
 
         if (!isset($_POST['submit'])) {
-            self::render('article/article');
+            self::render('article/new-article');
             exit();
         }
 
         if (!isset($_POST['content']) || !isset($_POST['title'])) {
-            self::render('user/user-account');
+            self::render('article/new-article');
             exit();
         }
 
         $article = strip_tags($_POST['content'], Config::ALLOWED_TAGS);
         $title = strip_tags($_POST['title']);
+        $error = [];
 
-        if (empty($article) || empty($title)) {
-            self::render('user/user-account');
+        if (strlen($title) < 5 || strlen($title) >= 255) {
+            $error[] = 'Le titre doit faire entre 5 et 255 caractères';
+        }
+
+        if (strlen($article) < 10) {
+            $error[] = "l'article doit faire au moins 100 caractères";
+        }
+
+        if (count($error) > 0) {
+            $_SESSION['error'] = $error;
+            self::render('article/new-article');
             exit();
         }
 
@@ -96,13 +106,27 @@ class ArticleController extends AbstractController
 
         $newTitle = strip_tags($_POST['title']);
         $newContent = strip_tags($_POST['content'], Config::ALLOWED_TAGS);
+        $error = [];
 
-        if (empty($newTitle) || empty($newContent)) {
+        if (strlen($newTitle) < 5 || strlen($newTitle) >= 255) {
+            $error[] = 'Le titre doit faire entre 5 et 255 caractères';
+        }
+
+        if (strlen($newContent) < 100) {
+            $error[] = "l'article doit faire au moins 100 caractères";
+        }
+
+        if (count($error) > 0) {
+            $_SESSION['error'] = $error;
             self::default();
             exit();
         }
 
         $articleManager = new ArticleManager();
+        if ($_SESSION['user']->getId() !== $articleManager->getArticleById($id)->getUser()->getId()) {
+            self::default();
+            exit();
+        }
         $articleManager->editArticle($newTitle, $newContent, $id);
 
         self::showArticle($id);

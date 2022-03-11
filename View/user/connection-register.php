@@ -20,8 +20,8 @@ if (!isset($_SESSION['user'])) {
     <input type="email" placeholder="Votre email" name="email">
     <input type="text" placeholder="Votre pseudo" name="username" class="username">
 
-    <input type="password" placeholder="Votre mot de passe" name="password">
-    <input type="password" placeholder="Répéter votre mot de passe" name="passwordRepeat">
+    <input type="password" placeholder="Votre mot de passe" name="password" id="p1">
+    <input type="password" placeholder="Répéter votre mot de passe" name="passwordRepeat" id="p2">
 
     <input type="submit" name="submitRegister">
 </form>

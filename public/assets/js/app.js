@@ -129,5 +129,14 @@ function checkForm() {
                 password.setCustomValidity('');
             }
         })
+
+        if (document.querySelector('#p1')) {
+            let password = document.querySelector('#p2')
+            if (document.querySelector('#p1').value !== password.value) {
+                password.setCustomValidity("Les mots de passe de corespondent pas");
+            } else {
+                password.setCustomValidity('');
+            }
+        }
     }
 }

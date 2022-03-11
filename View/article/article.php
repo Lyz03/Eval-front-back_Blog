@@ -15,7 +15,7 @@ use App\Model\Manager\CommentManager;
 
         <form action="/?c=comment&a=add-comment&id=<?= $data['article']->getId() ?>" method="post">
             <label for="addComment">Ajouter un commentaire : </label>
-            <textarea name="comment" id="addComment" cols="30" rows="10" class="comment" maxlength="255"
+            <textarea name="comment" id="addComment" cols="40" rows="10" class="comment" maxlength="255"
                       required></textarea>
             <input type="submit" name="submit">
         </form>

@@ -68,8 +68,8 @@ if(isset($_SESSION['error'])) {
 </div>
 
 <footer>
-    <div>Infos de contact</div>
-    <div>Horaires</div>
+    <div>Nous contacter : <address>Address@mail.com</address></div>
+    <div>&copy owner</div>
 </footer>
 
 <script src="https://kit.fontawesome.com/25d98733ec.js" crossorigin="anonymous"></script>

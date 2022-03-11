@@ -3,7 +3,7 @@
 :root {
     --white: rgb(252, 252, 252);
     --black: rgb(78, 78, 78);
-    --mainColor: rgb(121, 136, 146);
+    --mainColor: rgb(129, 160, 179);
     --mainColor2: rgb(101, 134, 141);
 }
 
@@ -42,6 +42,17 @@ span {
     font-weight: bold;
 }
 
+a {
+    color: var(--mainColor);
+    display: inline-block;
+    padding: 0.3rem;
+}
+
+textarea {
+    resize: none;
+    max-width: 100%;
+}
+
 main {
     max-width: 75%;
     padding: 1rem;
@@ -53,7 +64,8 @@ aside {
     width: 18rem;
     padding: 0.5rem;
     margin-top: 1rem;
-    max-height: 42rem;
+    margin-right: 1rem;
+    max-height: 44rem;
 }
 
 footer {
@@ -62,6 +74,10 @@ footer {
     bottom: 0;
     padding: 1rem;
     background-color: var(--mainColor2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--white);
 }
 
 .flex {
@@ -135,6 +151,62 @@ nav a:hover {
 }
 
 /*
+ * Connection / Inscription
+ */
+form h2 {
+    color: var(--mainColor);
+}
+
+#register, #connection {
+    padding: 1rem;
+    border: 2px solid var(--mainColor2);
+    border-radius: 15px;
+    width: 30rem;
+    max-width: 100%;
+    margin: 2rem auto;
+}
+
+form input:not([type=submit]) {
+    max-width: 90%;
+    font-size: 1rem;
+    display: block;
+    padding: 0.3rem 0.5rem;
+    width: 20rem;
+    margin: 2rem;
+    color: #8d8d8d;
+}
+
+form input:not([type=submit], [type=search]):focus {
+    outline: none;
+}
+
+form input[type=submit] {
+    margin-top: 0.5rem;
+    margin-left: 2rem;
+    padding: 0.3rem 0.5rem 0.4rem 0.5rem;
+    background-color: var(--mainColor);
+    border: none;
+    color: var(--white);
+}
+
+p.createAccount {
+    text-align: center;
+}
+
+span.createAccount {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+span.createAccount:hover {
+    cursor: pointer;
+}
+
+#register {
+    display: none;
+}
+
+/*
  * RESPONSIVE
  */
 
@@ -151,10 +223,13 @@ nav a:hover {
  * Aside
  */
 @media screen and (max-width: 750px) {
-    aside {
-        position: relative;
-        width: 95%;
-        margin: auto;
+    .flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main {
+        max-width: 95%;
     }
 }
 
@@ -193,58 +268,4 @@ nav a:hover {
         width: 100%;
         justify-content: center;
     }
-}
-
-/*
- * Connection / Inscription
- */
-form h2 {
-    color: var(--mainColor);
-}
-
-#register, #connection {
-    padding: 1rem;
-    border: 2px solid var(--mainColor2);
-    border-radius: 15px;
-    width: 30rem;
-    max-width: 100%;
-    margin: 2rem auto;
-}
-
-form input:not([type=submit], [type=search]) {
-    font-size: 1rem;
-    display: block;
-    padding: 0.3rem 0.5rem;
-    width: 20rem;
-    margin: 2rem;
-    color: #8d8d8d;
-}
-
-form input:not([type=submit], [type=search]):focus {
-    outline: none;
-}
-
-form input[type=submit] {
-    margin-left: 2rem;
-    padding: 0.3rem 0.5rem 0.4rem 0.5rem;
-    background-color: var(--mainColor);
-    border: none;
-    color: var(--white);
-}
-
-p.createAccount {
-    text-align: center;
-}
-
-span.createAccount {
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-span.createAccount:hover {
-    cursor: pointer;
-}
-
-#register {
-    display: none;
 }

@@ -18,6 +18,7 @@
   - modifier ses articles
 - Admin : 
   - Utilisateur + Rédacteur +
+  - peut modifier le role d'un utilisateur
   - supprimer des commentaires
   - supprimer des articles
   - supprimer des utilisateurs

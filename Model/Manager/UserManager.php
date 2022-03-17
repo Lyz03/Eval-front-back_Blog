@@ -26,7 +26,7 @@ class UserManager
     }
 
     /**
-     * Return all comments
+     * Return all users
      * @return array
      */
     public function getAll():array {
